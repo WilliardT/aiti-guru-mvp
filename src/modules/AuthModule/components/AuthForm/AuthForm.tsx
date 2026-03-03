@@ -12,6 +12,7 @@ const AuthForm: FC<{
   // for demo
   const [username, setUsername] = useState('emilys');
   const [password, setPassword] = useState('emilyspass');
+  const [showPassword, setShowPassword] = useState(false);
 
   const [rememberMe, setRememberMe] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -189,7 +190,7 @@ const AuthForm: FC<{
               className={styles.input}
               id="password"
               name="password"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="Введите пароль"
               value={password}
               onChange={(event) => {
@@ -201,13 +202,19 @@ const AuthForm: FC<{
               }}
             />
 
-            <span className={styles.inputIconPlaceholder} aria-hidden="true">
+            <button
+              className={styles.inputIconButton}
+              type="button"
+              aria-label={showPassword ? 'Скрыть пароль' : 'Показать пароль'}
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
               <img
-                className={styles.inputIconRight}
+                className={`${styles.inputIconRight} ${styles.inputIconEye}`}
                 src="/icons/eye-off.svg"
                 alt=""
+                aria-hidden="true"
               />
-            </span>
+            </button>
           </div>
 
           {fieldErrors.password ? (
