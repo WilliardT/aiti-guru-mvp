@@ -3,7 +3,7 @@ import AuthModule from '../../modules/AuthModule/AuthModule.tsx';
 
 
 const LoginPage: FC<{
-  onLogin: () => void;
+  onLogin: (token: string, rememberMe: boolean) => void;
 }> = ({ onLogin }) => {
 
   return (

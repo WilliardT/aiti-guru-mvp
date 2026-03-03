@@ -4,7 +4,7 @@ import AuthForm from './components/AuthForm/AuthForm.tsx';
 
 
 const AuthModule: FC<{
-  onLogin: () => void;
+  onLogin: (token: string, rememberMe: boolean) => void;
 }> = ({ onLogin }) => {
 
   return (

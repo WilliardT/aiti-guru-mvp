@@ -50,6 +50,10 @@
   margin-bottom: 8px;
 }
 
+.field {
+  margin-bottom: 16px;
+}
+
 .input {
   width: 100%;
   border-radius: 12px;
@@ -58,7 +62,6 @@
   min-height: 52px;
   padding: 0 16px;
   font-size: 18px;
-  margin-bottom: 16px;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -67,13 +70,38 @@
   border-color: #3e43ff;
 }
 
+.inputError {
+  border-color: #db4b4b;
+}
+
+.errorText {
+  margin-top: 6px;
+  color: #db4b4b;
+  font-size: 14px;
+}
+
 .checkboxRow {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   color: #b0b0b7;
-  margin: 4px 0 22px;
+  margin: 4px 0 16px;
   font-size: 16px;
+}
+
+.formErrorSlot {
+  min-height: 22px;
+  margin-bottom: 8px;
+}
+
+.formError {
+  color: #db4b4b;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.formErrorHidden {
+  visibility: hidden;
 }
 
 .loginButton.loginButton {
@@ -105,8 +133,30 @@
     inset 0 -1px 0 rgba(36, 46, 219, 0.35);
 }
 
+.loginButton.loginButton.Mui-disabled {
+  color: $appWhite;
+  background: $appBlue;
+  border-color: $appBlueStroke;
+  opacity: 1;
+  box-shadow:
+    0 8px 16px rgba(36, 46, 219, 0.22),
+    inset 0 1px 0 rgba(54, 122, 255, 0.55),
+    inset 0 -1px 0 rgba(36, 46, 219, 0.35);
+}
+
 .loginButton.loginButton:active {
   transform: translateY(1px);
+}
+
+.buttonLoader {
+  opacity: 0.9;
+}
+
+.loaderCenter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .divider {
@@ -141,6 +191,7 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
 
 @media (max-width: 600px) {
   .shell {

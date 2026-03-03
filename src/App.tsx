@@ -1,7 +1,11 @@
 import './App.css';
 import { FC, useEffect, useMemo, useState } from 'react';
-import { AUTH_STORAGE_KEY, AppRoutes } from './core/router/routes.ts';
+import { AppRoutes } from './core/router/routes.ts';
 import { navigateTo } from './core/router/navigation.ts';
+import {
+  hasAuthToken,
+  saveAuthToken,
+} from '@core/router/helpers/authSession.ts';
 import { usePathname } from '@core/router/helpers/usePathname.ts';
 import LoginPage from './pages/LoginPage/LoginPage.tsx';
 import ProductsPage from './pages/ProductsPage/ProductsPage.tsx';
@@ -9,14 +13,15 @@ import ProductsPage from './pages/ProductsPage/ProductsPage.tsx';
 
 const App:FC = () => {
   const pathname = usePathname();
-  const [isAuthorized, setIsAuthorized] = useState(
-    window.localStorage.getItem(AUTH_STORAGE_KEY) === 'true',
-  );
+  const [isAuthorized, setIsAuthorized] = useState(hasAuthToken());
 
-  const handleLogin = () => {
+  const handleLogin = (
+    token: string,
+    rememberMe: boolean
+  ) => {
+    saveAuthToken(token, rememberMe);
+
     setIsAuthorized(true);
-
-    window.localStorage.setItem(AUTH_STORAGE_KEY, 'true');
 
     navigateTo(AppRoutes.PRODUCTS);
   };

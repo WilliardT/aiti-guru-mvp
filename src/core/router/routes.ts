@@ -3,5 +3,3 @@ export const AppRoutes = {
   LOGIN: '/login',
   PRODUCTS: '/products',
 } as const;
-
-export const AUTH_STORAGE_KEY = 'token';

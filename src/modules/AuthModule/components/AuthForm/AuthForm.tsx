@@ -1,17 +1,83 @@
-import {type FC, SyntheticEvent} from 'react';
-import { Button } from '@mui/material';
+import { type FC, type FormEvent, useState } from 'react';
+import { Button, CircularProgress } from '@mui/material';
+import { signInApi } from '../../api/authModuleApi.ts';
+import { normalizeUsername } from '../../helpers/helpersInputs.ts';
 import styles from './AuthForm.module.scss';
 
 
 const AuthForm: FC<{
-  onLogin: () => void;
+  onLogin: (token: string, rememberMe: boolean) => void;
 }> = ({ onLogin }) => {
 
-  const handleSubmit = (
-    event: SyntheticEvent<HTMLFormElement>
-  ) => {
+  // for demo
+  const [username, setUsername] = useState('emilys');
+  const [password, setPassword] = useState('emilyspass');
+
+  const [rememberMe, setRememberMe] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // вынести в хелпер обработки ошибок общего httpRequest
+  const [apiError, setApiError] = useState('');
+
+  const [fieldErrors, setFieldErrors] = useState<{
+    username?: string;
+    password?: string;
+  }>({});
+
+  const validateFields = (): boolean => {
+    const nextErrors: {
+      username?: string;
+      password?: string;
+    } = {};
+
+    if (!normalizeUsername(username)) {
+      nextErrors.username = 'Введите логин';
+    }
+
+    if (!password.trim()) {
+      nextErrors.password = 'Введите пароль';
+    }
+
+    setFieldErrors(nextErrors);
+
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onLogin();
+
+    setApiError('');
+
+    if (!validateFields()) {
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      const authData = await signInApi({
+        username: normalizeUsername(username),
+        password: password.trim(),
+        expiresInMins: rememberMe ? 60 * 24 * 30 : 60,
+      });
+
+      const token = authData.accessToken;
+
+      if (!token) {
+        throw new Error('Сервер не вернул токен авторизации');
+      }
+
+      onLogin(token, rememberMe);
+
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : 'Не удалось выполнить вход';
+
+      setApiError(message);
+
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
 
@@ -31,37 +97,76 @@ const AuthForm: FC<{
 
         <p className={styles.subtitle}>Пожалуйста, авторизируйтесь</p>
 
-        <label
-          className={styles.fieldLabel}
-          htmlFor="login"
-        >
-          Логин
-        </label>
+        <div className={styles.formErrorSlot}>
+          <p
+            className={`${styles.formError} ${!apiError ? styles.formErrorHidden : ''}`}
+            aria-live="polite"
+          >
+            {apiError || '\u00A0'}
+          </p>
+        </div>
 
-        <input
-          className={styles.input}
-          id="login"
-          name="login"
-          type="text"
-          placeholder="Введите логин"
-          defaultValue="test"
-        />
+        <div className={styles.field}>
+          <label
+            className={styles.fieldLabel}
+            htmlFor="login"
+          >
+            Логин
+          </label>
 
-        <label className={styles.fieldLabel} htmlFor="password">
-          Пароль
-        </label>
+          <input
+            className={`${styles.input} ${fieldErrors.username ? styles.inputError : ''}`}
+            id="login"
+            name="login"
+            type="text"
+            placeholder="Введите логин"
+            value={username}
+            onChange={(event) => {
+              setUsername(event.target.value);
 
-        <input
-          className={styles.input}
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Введите пароль"
-          defaultValue="123456"
-        />
+              if (fieldErrors.username) {
+                setFieldErrors((prev) => ({ ...prev, username: undefined }));
+              }
+            }}
+          />
+
+          {fieldErrors.username ? (
+            <p className={styles.errorText}>{fieldErrors.username}</p>
+          ) : null}
+        </div>
+
+        <div className={styles.field}>
+          <label className={styles.fieldLabel} htmlFor="password">
+            Пароль
+          </label>
+
+          <input
+            className={`${styles.input} ${fieldErrors.password ? styles.inputError : ''}`}
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Введите пароль"
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+
+              if (fieldErrors.password) {
+                setFieldErrors((prev) => ({ ...prev, password: undefined }));
+              }
+            }}
+          />
+
+          {fieldErrors.password ? (
+            <p className={styles.errorText}>{fieldErrors.password}</p>
+          ) : null}
+        </div>
 
         <label className={styles.checkboxRow}>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={rememberMe}
+            onChange={(event) => setRememberMe(event.target.checked)}
+          />
           <span>Запомнить данные</span>
         </label>
 
@@ -70,8 +175,20 @@ const AuthForm: FC<{
           type="submit"
           variant="contained"
           disableElevation
+          disabled={isSubmitting}
         >
-          Войти
+          {isSubmitting ? (
+            <span className={styles.loaderCenter}>
+              <CircularProgress
+                size={18}
+                thickness={5}
+                color="inherit"
+                className={styles.buttonLoader}
+              />
+            </span>
+          ) : (
+            'Войти'
+          )}
         </Button>
 
         <div className={styles.divider}>
