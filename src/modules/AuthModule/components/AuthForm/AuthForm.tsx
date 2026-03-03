@@ -114,21 +114,56 @@ const AuthForm: FC<{
             Логин
           </label>
 
-          <input
-            className={`${styles.input} ${fieldErrors.username ? styles.inputError : ''}`}
-            id="login"
-            name="login"
-            type="text"
-            placeholder="Введите логин"
-            value={username}
-            onChange={(event) => {
-              setUsername(event.target.value);
+          <div
+            className={`${styles.inputShell} ${fieldErrors.username ? styles.inputShellError : ''}`}
+          >
+            <img
+              className={styles.inputIconLeft}
+              src="/icons/user icon.svg"
+              alt=""
+              aria-hidden="true"
+            />
 
-              if (fieldErrors.username) {
-                setFieldErrors((prev) => ({ ...prev, username: undefined }));
-              }
-            }}
-          />
+            <input
+              className={styles.input}
+              id="login"
+              name="login"
+              type="text"
+              placeholder="Введите логин"
+              value={username}
+              onChange={(event) => {
+                setUsername(event.target.value);
+
+                if (fieldErrors.username) {
+                  setFieldErrors((prev) => ({ ...prev, username: undefined }));
+                }
+              }}
+            />
+
+            {username ? (
+              <button
+                className={styles.inputIconButton}
+                type="button"
+                aria-label="Очистить логин"
+                onClick={() => {
+                  setUsername('');
+
+                  if (fieldErrors.username) {
+                    setFieldErrors((prev) => ({ ...prev, username: undefined }));
+                  }
+                }}
+              >
+                <img
+                  className={styles.inputIconRight}
+                  src="/icons/close-icon.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+            ) : (
+              <span className={styles.inputIconPlaceholder} aria-hidden="true" />
+            )}
+          </div>
 
           {fieldErrors.username ? (
             <p className={styles.errorText}>{fieldErrors.username}</p>
@@ -140,21 +175,40 @@ const AuthForm: FC<{
             Пароль
           </label>
 
-          <input
-            className={`${styles.input} ${fieldErrors.password ? styles.inputError : ''}`}
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Введите пароль"
-            value={password}
-            onChange={(event) => {
-              setPassword(event.target.value);
+          <div
+            className={`${styles.inputShell} ${fieldErrors.password ? styles.inputShellError : ''}`}
+          >
+            <img
+              className={styles.inputIconLeft}
+              src="/icons/lock-03.svg"
+              alt=""
+              aria-hidden="true"
+            />
 
-              if (fieldErrors.password) {
-                setFieldErrors((prev) => ({ ...prev, password: undefined }));
-              }
-            }}
-          />
+            <input
+              className={styles.input}
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Введите пароль"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+
+                if (fieldErrors.password) {
+                  setFieldErrors((prev) => ({ ...prev, password: undefined }));
+                }
+              }}
+            />
+
+            <span className={styles.inputIconPlaceholder} aria-hidden="true">
+              <img
+                className={styles.inputIconRight}
+                src="/icons/eye-off.svg"
+                alt=""
+              />
+            </span>
+          </div>
 
           {fieldErrors.password ? (
             <p className={styles.errorText}>{fieldErrors.password}</p>
