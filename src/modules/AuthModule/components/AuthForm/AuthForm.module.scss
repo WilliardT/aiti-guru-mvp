@@ -40,7 +40,7 @@
 
 .subtitle {
   text-align: center;
-  color: $appGray;
+  color: #CACACA;
   font-size: 18px;
   margin-bottom: 26px;
   line-height: 150%;
@@ -62,8 +62,8 @@
   width: 100%;
   border-radius: 12px;
   border: 1px solid #dfdfe5;
-  background: #fff;
-  min-height: 52px;
+  background: $rootBackground;
+  min-height: 55px;
   padding: 0 16px;
   font-size: 18px;
   outline: none;
