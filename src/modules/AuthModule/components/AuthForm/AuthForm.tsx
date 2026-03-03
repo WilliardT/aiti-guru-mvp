@@ -16,71 +16,73 @@ const AuthForm: FC<{
 
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={handleSubmit}
-    >
-      <img
-        className={styles.logo}
-        src="/icons/Frame_1.svg"
-        alt="Логотип"
-      />
-
-      <h1 className={styles.title}>Добро пожаловать!</h1>
-
-      <p className={styles.subtitle}>Пожалуйста, авторизируйтесь</p>
-
-      <label
-        className={styles.fieldLabel}
-        htmlFor="login"
+    <div className={styles.shell}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit}
       >
-        Логин
-      </label>
+        <img
+          className={styles.logo}
+          src="/icons/Frame_1.svg"
+          alt="Логотип"
+        />
 
-      <input
-        className={styles.input}
-        id="login"
-        name="login"
-        type="text"
-        placeholder="Введите логин"
-        defaultValue="test"
-      />
+        <h1 className={styles.title}>Добро пожаловать!</h1>
 
-      <label className={styles.fieldLabel} htmlFor="password">
-        Пароль
-      </label>
+        <p className={styles.subtitle}>Пожалуйста, авторизируйтесь</p>
 
-      <input
-        className={styles.input}
-        id="password"
-        name="password"
-        type="password"
-        placeholder="Введите пароль"
-        defaultValue="123456"
-      />
+        <label
+          className={styles.fieldLabel}
+          htmlFor="login"
+        >
+          Логин
+        </label>
 
-      <label className={styles.checkboxRow}>
-        <input type="checkbox" />
-        <span>Запомнить данные</span>
-      </label>
+        <input
+          className={styles.input}
+          id="login"
+          name="login"
+          type="text"
+          placeholder="Введите логин"
+          defaultValue="test"
+        />
 
-      <Button
-        className={styles.loginButton}
-        type="submit"
-        variant="contained"
-        disableElevation
-      >
-        Войти
-      </Button>
+        <label className={styles.fieldLabel} htmlFor="password">
+          Пароль
+        </label>
 
-      <div className={styles.divider}>
-        <span>или</span>
-      </div>
+        <input
+          className={styles.input}
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Введите пароль"
+          defaultValue="123456"
+        />
 
-      <p className={styles.footer}>
-        Нет аккаунта? <span className={styles.createLink}>Создать</span>
-      </p>
-    </form>
+        <label className={styles.checkboxRow}>
+          <input type="checkbox" />
+          <span>Запомнить данные</span>
+        </label>
+
+        <Button
+          className={styles.loginButton}
+          type="submit"
+          variant="contained"
+          disableElevation
+        >
+          Войти
+        </Button>
+
+        <div className={styles.divider}>
+          <span>или</span>
+        </div>
+
+        <p className={styles.footer}>
+          Нет аккаунта? <span className={styles.createLink}>Создать</span>
+        </p>
+      </form>
+    </div>
   );
 };
 

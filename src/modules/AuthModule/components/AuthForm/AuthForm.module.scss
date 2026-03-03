@@ -1,14 +1,24 @@
 @import "@core/styles/variables";
 
 
-.form {
+.shell {
   width: 100%;
   max-width: 527px;
-  border-radius: 28px;
-  padding: 32px 28px;
-  background: $appWhite;
-  box-shadow: 0 20px 34px rgba(24, 28, 50, 0.06);
-  border: 1px solid #f1f1f3;
+  border-radius: 40px;
+  padding: 6px;
+  background: linear-gradient(180deg, $appWhite 0%, #ececf0 100%);
+  box-shadow:
+    0 20px 34px rgba(24, 28, 50, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1px 0 rgba(223, 223, 229, 0.85);
+}
+
+.form {
+  width: 100%;
+  border-radius: 34px;
+  padding: 48px;
+  background: $rootBackground;
+  border: 1px solid #ededf1;
 }
 
 .logo {
@@ -133,10 +143,15 @@
 }
 
 @media (max-width: 600px) {
-  .form {
+  .shell {
     max-width: 100%;
-    border-radius: 22px;
-    padding: 24px 16px;
+    border-radius: 30px;
+    padding: 4px;
+  }
+
+  .form {
+    border-radius: 26px;
+    padding: 28px 18px;
   }
 
   .title {
