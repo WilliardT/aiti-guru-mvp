@@ -1,3 +1,7 @@
+:root {
+  --font-base: Inter, sans-serif;
+}
+
 *,
 *::before,
 *::after {
@@ -13,6 +17,7 @@ body {
 }
 
 body {
+  font-family: var(--font-base);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

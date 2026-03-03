@@ -29,22 +29,26 @@
 
 .title {
   text-align: center;
-  font-size: 42px;
-  line-height: 1.08;
-  color: #1f1f24;
+  font-size: 40px;
+  color: $baseTextColor;
   margin-bottom: 10px;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  line-height: 1.1;
 }
 
 .subtitle {
   text-align: center;
-  color: #b4b4ba;
+  color: $appGray;
   font-size: 18px;
   margin-bottom: 26px;
+  line-height: 150%;
 }
 
 .fieldLabel {
   display: block;
-  color: #44444a;
+  color: $baseTextColor;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 8px;
@@ -111,7 +115,6 @@
   border-radius: 12px;
   border: 1px solid $appBlueStroke;
   text-transform: none;
-  font-family: Inter, sans-serif;
   letter-spacing: -0.01em;
   line-height: 1.2;
   font-size: 18px;
@@ -214,7 +217,7 @@
   }
 
   .fieldLabel {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .input {
