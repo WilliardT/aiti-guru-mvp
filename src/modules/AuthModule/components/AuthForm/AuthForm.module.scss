@@ -292,7 +292,7 @@
 
 .footer {
   text-align: center;
-  color: #9f9fa7;
+  color: #6C6C6C;
   font-size: 18px;
 }
 
@@ -300,6 +300,8 @@
   color: #2f4cff;
   font-weight: 700;
   text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 3px;
   cursor: pointer;
 }
 
