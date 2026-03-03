@@ -1,0 +1,8 @@
+.appLayout {
+  min-height: 100vh;
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+  align-content: start;
+  background: #f5f7fb;
+}

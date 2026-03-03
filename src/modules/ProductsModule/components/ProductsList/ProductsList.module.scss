@@ -1,0 +1,10 @@
+@import "@core/styles/variables";
+
+.list {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: $brandWhite;
+  max-width: 640px;
+  padding: 24px;
+}
