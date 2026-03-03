@@ -68,6 +68,7 @@ const AuthForm: FC<{
         className={styles.loginButton}
         type="submit"
         variant="contained"
+        disableElevation
       >
         Войти
       </Button>
