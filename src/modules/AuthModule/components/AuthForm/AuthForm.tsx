@@ -1,5 +1,10 @@
 import { type FC, type FormEvent, useState } from 'react';
-import { Button, CircularProgress } from '@mui/material';
+import {
+  Button,
+  Checkbox,
+  CircularProgress,
+  FormControlLabel,
+} from '@mui/material';
 import { signInApi } from '../../api/authModuleApi.ts';
 import { normalizeUsername } from '../../helpers/helpersInputs.ts';
 import styles from './AuthForm.module.scss';
@@ -222,14 +227,24 @@ const AuthForm: FC<{
           ) : null}
         </div>
 
-        <label className={styles.checkboxRow}>
-          <input
-            type="checkbox"
-            checked={rememberMe}
-            onChange={(event) => setRememberMe(event.target.checked)}
-          />
-          <span>Запомнить данные</span>
-        </label>
+        <FormControlLabel
+          className={styles.checkboxRow}
+          control={(
+            <Checkbox
+              className={styles.checkboxControl}
+              disableRipple
+              checked={rememberMe}
+              onChange={(event) => setRememberMe(event.target.checked)}
+              icon={<span className={styles.checkboxIcon} />}
+              checkedIcon={(
+                <span className={`${styles.checkboxIcon} ${styles.checkboxIconChecked}`}>
+                  <span className={styles.checkboxTick} />
+                </span>
+              )}
+            />
+          )}
+          label="Запомнить данные"
+        />
 
         <Button
           className={styles.loginButton}
