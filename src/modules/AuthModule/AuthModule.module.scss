@@ -1,4 +1,6 @@
 .authModule {
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px 12px;
 }

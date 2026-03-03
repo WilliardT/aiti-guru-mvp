@@ -1,32 +1,85 @@
-import { type FC } from 'react';
-import { Button, TextField } from '@mui/material';
+import {type FC, SyntheticEvent} from 'react';
+import { Button } from '@mui/material';
 import styles from './AuthForm.module.scss';
 
 
-const AuthForm: FC = () => {
+const AuthForm: FC<{
+  onLogin: () => void;
+}> = ({ onLogin }) => {
+
+  const handleSubmit = (
+    event: SyntheticEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    onLogin();
+  };
+
 
   return (
-    <div className={styles.form}>
-      <div>
-        <h1>Авторизация</h1>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit}
+    >
+      <img
+        className={styles.logo}
+        src="/icons/Frame_1.svg"
+        alt="Логотип"
+      />
 
-        <TextField
-          fullWidth
-          label="Email"
-          type="email"
-        />
+      <h1 className={styles.title}>Добро пожаловать!</h1>
 
-        <TextField
-          fullWidth
-          label="Пароль"
-          type="password"
-        />
+      <p className={styles.subtitle}>Пожалуйста, авторизируйтесь</p>
 
-        <Button variant="contained">
-          Войти
-        </Button>
+      <label
+        className={styles.fieldLabel}
+        htmlFor="login"
+      >
+        Логин
+      </label>
+
+      <input
+        className={styles.input}
+        id="login"
+        name="login"
+        type="text"
+        placeholder="Введите логин"
+        defaultValue="test"
+      />
+
+      <label className={styles.fieldLabel} htmlFor="password">
+        Пароль
+      </label>
+
+      <input
+        className={styles.input}
+        id="password"
+        name="password"
+        type="password"
+        placeholder="Введите пароль"
+        defaultValue="123456"
+      />
+
+      <label className={styles.checkboxRow}>
+        <input type="checkbox" />
+        <span>Запомнить данные</span>
+      </label>
+
+      <Button
+        className={styles.loginButton}
+        type="submit"
+        variant="contained"
+      >
+        Войти
+      </Button>
+
+      <div className={styles.divider}>
+        <span>или</span>
       </div>
-    </div>
+
+      <p className={styles.footer}>
+        Нет аккаунта? <span className={styles.createLink}>Создать</span>
+      </p>
+    </form>
   );
 };
 
