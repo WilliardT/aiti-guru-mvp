@@ -11,7 +11,7 @@
   width: 100%;
   min-height: 98px;
   border-radius: 14px;
-  background: #f6f6f8;
+  background: $appWhite;
   border: 1px solid #ededf1;
   padding: 24px 28px;
   display: grid;
@@ -21,8 +21,7 @@
 }
 
 .pageTitle {
-  color: #2f2f37;
-  font-size: 40px;
+  font-size: 26px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -32,7 +31,8 @@
   min-height: 52px;
   border-radius: 10px;
   border: 1px solid #e8e8ec;
-  background: #ececef;
+  //background: #ececef; mb
+  background: $rootBackground;
   display: flex;
   align-items: center;
   padding: 0 16px;
@@ -40,9 +40,9 @@
 }
 
 .searchIcon {
-  color: #8f919c;
-  font-size: 24px;
-  line-height: 1;
+  width: 24px;
+  height: 24px;
+  display: block;
   flex: 0 0 auto;
 }
 
@@ -50,7 +50,6 @@
   width: 100%;
   border: 0;
   background: transparent;
-  color: #2f2f37;
   font-size: 20px;
   outline: none;
 }
@@ -308,7 +307,7 @@
 @media (max-width: 1400px) {
   .pageTitle,
   .tableTitle {
-    font-size: 32px;
+    font-size: 26px;
   }
 
   .nameTitle,

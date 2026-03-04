@@ -91,7 +91,14 @@ const ProductsList: FC = () => {
         <h1 className={styles.pageTitle}>Товары</h1>
 
         <label className={styles.searchField}>
-          <span className={styles.searchIcon}>⌕</span>
+          <img
+            className={styles.searchIcon}
+            src="/icons/search.svg"
+            width={24}
+            height={24}
+            alt=""
+            aria-hidden="true"
+          />
 
           <input
             className={styles.searchInput}
