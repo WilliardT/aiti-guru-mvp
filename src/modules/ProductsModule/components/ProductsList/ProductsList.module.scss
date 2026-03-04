@@ -340,10 +340,16 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  border: 1px solid #c5c7cf;
-  color: #9ca0ab;
-  font-size: 22px;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionGhostIcon {
+  width: 32px;
+  height: 32px;
+  display: block;
+  flex: 0 0 auto;
 }
 
 @media (max-width: 1400px) {

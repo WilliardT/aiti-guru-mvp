@@ -102,7 +102,14 @@ const renderActionsCell = (
         type="button"
         aria-label="Дополнительные действия"
       >
-        ...
+        <img
+          className={styles.actionGhostIcon}
+          src="/icons/DotsThreeCircle.svg"
+          width={32}
+          height={32}
+          alt=""
+          aria-hidden="true"
+        />
       </button>
     </div>
   );
