@@ -4,6 +4,7 @@ import {
   type FormEvent,
   useState,
 } from 'react';
+import { createPortal } from 'react-dom';
 import { toast } from 'react-toastify';
 import styles from './AddProductModal.module.scss';
 
@@ -85,8 +86,11 @@ const AddProductModal: FC<IAddProductModalProps> = ({
     return null;
   }
 
+  if (typeof document === 'undefined') {
+    return null;
+  }
 
-  return (
+  return createPortal(
     <div
       className={styles.modalOverlay}
       onClick={handleClose}
@@ -178,7 +182,8 @@ const AddProductModal: FC<IAddProductModalProps> = ({
           </div>
         </form>
       </section>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
