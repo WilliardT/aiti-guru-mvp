@@ -94,7 +94,7 @@ const renderActionsCell = (
         type="button"
         aria-label="Добавить товар"
       >
-        +
+        <span className={styles.actionPrimaryIcon}>+</span>
       </button>
 
       <button

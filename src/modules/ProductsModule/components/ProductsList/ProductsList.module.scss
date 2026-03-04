@@ -318,13 +318,22 @@
 }
 
 .actionPrimary {
-  min-width: 52px;
-  height: 34px;
+  width: 52px;
+  height: 27px;
   border-radius: 999px;
   background: $appBlue;
   color: $appWhite;
-  font-size: 30px;
+  font-size: 24px;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionPrimaryIcon {
+  display: block;
+  line-height: 1;
+  transform: translateY(-1px);
 }
 
 .actionGhost {
