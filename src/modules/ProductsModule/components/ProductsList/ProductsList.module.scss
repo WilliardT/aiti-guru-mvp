@@ -146,11 +146,29 @@
 
 .gridWrap {
   height: 560px;
+  position: relative;
 }
 
 .gridTheme {
   width: 100%;
   height: 100%;
+}
+
+.loadingProgress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px !important;
+  background: #e2e7f5 !important;
+  border-radius: 999px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.loadingProgress :global(.MuiLinearProgress-bar) {
+  background: #3C538E !important;
 }
 
 .gridTheme :global(.ag-root-wrapper) {

@@ -11,6 +11,7 @@ import {
   ModuleRegistry,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
+import LinearProgress from '@mui/material/LinearProgress';
 import { useAppDispatch, useAppSelector } from '@core/store/hooks.ts';
 import { getProductsThunk } from '../../store/thunk/ProductsModuleThunk.ts';
 import {
@@ -154,6 +155,14 @@ const ProductsList: FC = () => {
         ) : null}
 
         <div className={styles.gridWrap}>
+          {isLoading ? (
+            <LinearProgress
+              className={styles.loadingProgress}
+              variant="indeterminate"
+              aria-label="Подгрузка данных"
+            />
+          ) : null}
+
           <div className={`ag-theme-quartz ${styles.gridTheme}`}>
             <AgGridReact<IProduct>
               rowData={products}
