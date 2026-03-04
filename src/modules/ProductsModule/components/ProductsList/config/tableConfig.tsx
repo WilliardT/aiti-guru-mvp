@@ -49,7 +49,7 @@ const renderRatingCell = (
     return null;
   }
 
-  const isLowRating = data.rating < 4;
+  const isLowRating = data.rating < 3;
 
   return (
     <span className={`${styles.ratingValue} ${isLowRating ? styles.ratingValueLow : ''}`}>
