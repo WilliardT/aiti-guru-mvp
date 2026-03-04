@@ -79,7 +79,7 @@
 
 .tableTitle {
   color: #2f2f37;
-  font-size: 40px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -100,11 +100,21 @@
   color: #7a7e8a;
   font-size: 23px;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .refreshButton:disabled {
   opacity: 0.6;
   cursor: default;
+}
+
+.refreshIcon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  flex: 0 0 auto;
 }
 
 .addButton {
@@ -305,9 +315,12 @@
 }
 
 @media (max-width: 1400px) {
-  .pageTitle,
-  .tableTitle {
+  .pageTitle {
     font-size: 26px;
+  }
+
+  .tableTitle {
+    font-size: 20px;
   }
 
   .nameTitle,

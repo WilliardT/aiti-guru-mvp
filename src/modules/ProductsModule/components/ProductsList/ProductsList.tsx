@@ -122,7 +122,14 @@ const ProductsList: FC = () => {
               disabled={isLoading}
               aria-label="Обновить таблицу"
             >
-              ↻
+              <img
+                className={styles.refreshIcon}
+                src="/icons/ArrowsClockwise.svg"
+                width={22}
+                height={22}
+                alt=""
+                aria-hidden="true"
+              />
             </button>
 
             <button
