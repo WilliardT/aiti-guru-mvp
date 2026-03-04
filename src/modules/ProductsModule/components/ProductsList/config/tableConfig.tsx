@@ -1,4 +1,10 @@
-import type { ColDef, ICellRendererParams } from 'ag-grid-community';
+import type {
+  ColDef,
+  GetRowIdParams,
+  GridOptions,
+  ICellRendererParams,
+  MultiRowSelectionOptions,
+} from 'ag-grid-community';
 import type { ReactElement } from 'react';
 import type { IProduct } from '../../../interfaces/types.ts';
 import { formatPrice, formatRating } from '../../../helpers/helpersInputs.ts';
@@ -93,15 +99,6 @@ const renderActionsCell = (
 export const getProductsColumnDefs = (styles: Record<string, string>): ColDef<IProduct>[] => {
   return [
     {
-      width: 56,
-      maxWidth: 56,
-      checkboxSelection: true,
-      headerCheckboxSelection: true,
-      resizable: false,
-      sortable: false,
-      pinned: 'left',
-    },
-    {
       headerName: 'Наименование',
       field: 'title',
       minWidth: 380,
@@ -142,7 +139,6 @@ export const getProductsColumnDefs = (styles: Record<string, string>): ColDef<IP
       width: 150,
       minWidth: 150,
       maxWidth: 150,
-      sortable: false,
       cellRenderer: () => renderActionsCell(styles),
       suppressHeaderMenuButton: true,
       headerName: '',
@@ -150,13 +146,52 @@ export const getProductsColumnDefs = (styles: Record<string, string>): ColDef<IP
   ];
 };
 
-export const productsGridConfig = {
-  rowSelection: 'multiple' as const,
+export const productsDefaultColDef: ColDef<IProduct> = {
+  sortable: false,
+  resizable: false,
+};
+
+const productsRowSelection: MultiRowSelectionOptions<IProduct> = {
+  mode: 'multiRow',
+  checkboxes: true,
+  headerCheckbox: true,
+  enableClickSelection: false,
+};
+
+export const getProductsRowId = ({
+  data,
+}: GetRowIdParams<IProduct>): string => String(data.id);
+
+export const productsGridConfig: Pick<
+  GridOptions<IProduct>,
+  | 'rowSelection'
+  | 'rowHeight'
+  | 'headerHeight'
+  | 'suppressCellFocus'
+  | 'animateRows'
+  | 'overlayLoadingTemplate'
+  | 'overlayNoRowsTemplate'
+  | 'defaultColDef'
+  | 'selectionColumnDef'
+  | 'getRowId'
+  | 'theme'
+> = {
+  rowSelection: productsRowSelection,
   rowHeight: 68,
   headerHeight: 56,
   suppressCellFocus: true,
-  suppressRowClickSelection: true,
   animateRows: true,
   overlayLoadingTemplate: "<span class='ag-overlay-loading-center'>Загрузка...</span>",
   overlayNoRowsTemplate: "<span class='ag-overlay-loading-center'>Ничего не найдено</span>",
+  defaultColDef: productsDefaultColDef,
+  selectionColumnDef: {
+    width: 56,
+    minWidth: 56,
+    maxWidth: 56,
+    pinned: 'left',
+    sortable: false,
+    resizable: false,
+  },
+  getRowId: getProductsRowId,
+  theme: 'legacy',
 };
