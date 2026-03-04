@@ -205,10 +205,26 @@
   margin-right: 0;
 }
 
+.gridTheme :global(.ag-checkbox-input-wrapper) {
+  width: 22px;
+  height: 22px;
+  font-size: 22px;
+  line-height: 22px;
+}
+
 .gridTheme :global(.ag-icon-checkbox-checked),
-.gridTheme :global(.ag-icon-checkbox-unchecked),
 .gridTheme :global(.ag-icon-checkbox-indeterminate) {
-  color: #4a59d8;
+  color: #3c538e;
+}
+
+.gridTheme :global(.ag-checkbox-input-wrapper.ag-checked),
+.gridTheme :global(.ag-checkbox-input-wrapper.ag-indeterminate),
+.gridTheme :global(.ag-input-field-input.ag-checkbox-input:checked) {
+  --ag-checkbox-checked-color: #3c538e !important;
+  --ag-checkbox-indeterminate-color: #3c538e !important;
+  --ag-icon-image-display-checkbox-checked: none;
+  --ag-icon-image-display-checkbox-indeterminate: none;
+  accent-color: #3c538e;
 }
 
 .centerHeader :global(.ag-header-cell-label) {
