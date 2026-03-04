@@ -28,3 +28,4 @@ export interface IProductsModuleState {
   error: string | null;
   total: number;
 }
+
