@@ -287,8 +287,13 @@
 .priceValue {
   color: #2a2d35;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1;
+  font-family: "Roboto Mono", monospace;
+}
+
+.priceFraction {
+  color: #acadb6;
 }
 
 .actionsCell {

@@ -69,7 +69,19 @@ const renderPriceCell = (
     return null;
   }
 
-  return <span className={styles.priceValue}>{formatPrice(data.price)}</span>;
+  const formattedPrice = formatPrice(data.price);
+  const [priceWhole, priceFraction] = formattedPrice.split(',');
+
+  if (!priceFraction) {
+    return <span className={styles.priceValue}>{formattedPrice}</span>;
+  }
+
+  return (
+    <span className={styles.priceValue}>
+      {priceWhole},
+      <span className={styles.priceFraction}>{priceFraction}</span>
+    </span>
+  );
 };
 
 const renderActionsCell = (

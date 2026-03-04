@@ -1,8 +1,8 @@
 export const formatPrice = (value: number): string => (
-  `${new Intl.NumberFormat('ru-RU', {
+  new Intl.NumberFormat('ru-RU', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(value)} ₽`
+  }).format(value)
 );
 
 export const formatRating = (value: number): string => (
