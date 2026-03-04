@@ -122,7 +122,8 @@ export const getProductsColumnDefs = (styles: Record<string, string>): ColDef<IP
       field: 'brand',
       minWidth: 170,
       flex: 0.8,
-      cellClass: styles.vendorValue,
+      headerClass: styles.centerHeader,
+      cellClass: [styles.vendorValue, styles.centerCell],
       valueGetter: ({ data }) => data?.brand ?? 'Без бренда',
     },
     {
@@ -131,13 +132,16 @@ export const getProductsColumnDefs = (styles: Record<string, string>): ColDef<IP
       minWidth: 180,
       flex: 0.9,
       valueGetter: ({ data }) => data?.sku ?? `SKU-${data?.id ?? ''}`,
-      cellClass: styles.skuValue,
+      headerClass: styles.centerHeader,
+      cellClass: [styles.skuValue, styles.centerCell],
     },
     {
       headerName: 'Оценка',
       field: 'rating',
       minWidth: 140,
       flex: 0.7,
+      headerClass: styles.centerHeader,
+      cellClass: styles.centerCell,
       cellRenderer: (params: ICellRendererParams<IProduct>) => renderRatingCell(params, styles),
     },
     {
@@ -145,6 +149,8 @@ export const getProductsColumnDefs = (styles: Record<string, string>): ColDef<IP
       field: 'price',
       minWidth: 170,
       flex: 0.8,
+      headerClass: styles.centerHeader,
+      cellClass: styles.centerCell,
       cellRenderer: (params: ICellRendererParams<IProduct>) => renderPriceCell(params, styles),
     },
     {
