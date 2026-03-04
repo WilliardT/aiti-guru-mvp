@@ -185,6 +185,7 @@
 
 .gridTheme :global(.ag-row) {
   border-bottom: 1px solid #ececf1;
+  font-size: 16px;
 }
 
 .gridTheme :global(.ag-row:hover) {
@@ -197,6 +198,7 @@
   padding-right: 14px;
   display: flex;
   align-items: center;
+  font-size: 16px;
 }
 
 .gridTheme :global(.ag-selection-checkbox) {
@@ -237,7 +239,7 @@
 
 .nameTitle {
   color: #232630;
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1;
   margin-bottom: 3px;
@@ -248,28 +250,28 @@
 
 .nameCategory {
   color: #acadb6;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1;
   text-transform: capitalize;
 }
 
 .vendorValue {
   color: #1f2230;
-  font-size: 31px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1;
 }
 
 .skuValue {
   color: #292b35;
-  font-size: 34px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1;
 }
 
 .ratingValue {
   color: #2c2f3a;
-  font-size: 34px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1;
 }
@@ -284,7 +286,7 @@
 
 .priceValue {
   color: #2a2d35;
-  font-size: 34px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1;
 }
@@ -331,7 +333,7 @@
   .skuValue,
   .ratingValue,
   .priceValue {
-    font-size: 22px;
+    font-size: 16px;
   }
 
   .searchInput {
