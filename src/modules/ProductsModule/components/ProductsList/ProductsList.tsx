@@ -55,6 +55,7 @@ const ProductsList: FC = () => {
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
       setSearchQuery(searchValue.trim());
+
       setCurrentPage(1);
     }, PRODUCTS_SEARCH_DEBOUNCE_MS);
 
@@ -82,6 +83,7 @@ const ProductsList: FC = () => {
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
+
 
   return (
     <div className={styles.page}>

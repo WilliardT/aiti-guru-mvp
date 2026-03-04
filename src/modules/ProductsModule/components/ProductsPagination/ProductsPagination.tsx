@@ -23,6 +23,7 @@ const getPageButtons = (page: number, totalPages: number): number[] => {
   return Array.from({ length: 5 }, (_, index) => startPage + index);
 };
 
+
 const ProductsPagination: FC<IProductsPaginationProps> = ({
   currentPage,
   totalPages,
@@ -44,6 +45,7 @@ const ProductsPagination: FC<IProductsPaginationProps> = ({
     () => getPageButtons(effectivePage, totalPages),
     [effectivePage, totalPages],
   );
+
 
   return (
     <footer className={styles.pagination}>

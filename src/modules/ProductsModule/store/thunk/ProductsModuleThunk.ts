@@ -6,6 +6,7 @@ import type {
   IProductsQueryParams,
 } from '../../interfaces/types.ts';
 
+
 export const getProductsThunk = createAsyncThunk<
   IProductsApiResponse,
   IProductsQueryParams,
