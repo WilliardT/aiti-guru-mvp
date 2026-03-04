@@ -50,7 +50,7 @@ const ProductsPagination: FC<IProductsPaginationProps> = ({
   return (
     <footer className={styles.pagination}>
       <p className={styles.paginationMeta}>
-        Показано {rangeStart}-{rangeEnd} из {totalItems}
+        Показано <span className={styles.paginationMetaValue}>{rangeStart}-{rangeEnd}</span> из <span className={styles.paginationMetaValue}>{totalItems}</span>
       </p>
 
       <div className={styles.paginationButtons}>
