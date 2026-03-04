@@ -9,6 +9,7 @@ import {
 import {
   AllCommunityModule,
   ModuleRegistry,
+  type ColDef,
   type GridReadyEvent,
   type SortChangedEvent,
 } from 'ag-grid-community';
@@ -16,7 +17,10 @@ import { AgGridReact } from 'ag-grid-react';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useAppDispatch, useAppSelector } from '@core/store/hooks.ts';
 import { getProductsThunk } from '../../store/thunk/ProductsModuleThunk.ts';
-import { setProductsSorting } from '../../store/reducer/ProductsModuleReducer.ts';
+import {
+  addLocalProduct,
+  setProductsSorting,
+} from '../../store/reducer/ProductsModuleReducer.ts';
 import {
   PRODUCTS_PAGE_SIZE,
   PRODUCTS_SEARCH_DEBOUNCE_MS,
@@ -31,13 +35,16 @@ import {
 } from '../../selectors/selectors.ts';
 import type { IProduct } from '../../interfaces/types.ts';
 import ProductsPagination from '../ProductsPagination/ProductsPagination.tsx';
+import AddProductModal, { type IAddProductFormValues } from '../AddProductModal/AddProductModal.tsx';
 import {
   getProductsColumnDefs,
   productsGridConfig,
 } from './config/tableConfig.tsx';
+import { ToastContainer, toast } from 'react-toastify';
 import styles from './ProductsList.module.scss';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 // инициализация AG Grid в модульном режиме
 // удобно вынести в main.tsx, чтобы регистрировать глобально один раз для всего приложения
@@ -68,6 +75,7 @@ const ProductsList: FC = () => {
   const [searchValue, setSearchValue] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
 
   const totalPages = Math.max(1, Math.ceil(totalProducts / PRODUCTS_PAGE_SIZE));
   const effectivePage = Math.min(currentPage, totalPages);
@@ -100,10 +108,30 @@ const ProductsList: FC = () => {
     fetchProducts();
   }, [fetchProducts]);
 
-  const columnDefs = useMemo(() => getProductsColumnDefs(styles), []);
+  const columnDefs: ColDef<IProduct>[] = useMemo(() => getProductsColumnDefs(styles), []);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
+  };
+
+  const openAddProductModal = () => {
+    setIsAddProductModalOpen(true);
+  };
+
+  const closeAddProductModal = () => {
+    setIsAddProductModalOpen(false);
+  };
+
+  const handleAddProductSubmit = (formValues: IAddProductFormValues) => {
+    dispatch(addLocalProduct({
+      title: formValues.title,
+      price: formValues.price,
+      brand: formValues.brand,
+      sku: formValues.sku,
+    }));
+
+    toast.success('Товар успешно добавлен');
+    closeAddProductModal();
   };
 
   const handleGridReady = useCallback((event: GridReadyEvent<IProduct>) => {
@@ -202,6 +230,7 @@ const ProductsList: FC = () => {
             <button
               className={styles.addButton}
               type="button"
+              onClick={openAddProductModal}
             >
               <img
                 className={styles.addButtonIcon}
@@ -249,6 +278,20 @@ const ProductsList: FC = () => {
           onPageChange={setCurrentPage}
         />
       </section>
+
+      <AddProductModal
+        isOpen={isAddProductModalOpen}
+        onClose={closeAddProductModal}
+        onSubmit={handleAddProductSubmit}
+      />
+
+      {/* на уровень приложения */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        closeOnClick
+        pauseOnHover
+      />
     </div>
   );
 };
