@@ -9,11 +9,14 @@ import {
 import {
   AllCommunityModule,
   ModuleRegistry,
+  type GridReadyEvent,
+  type SortChangedEvent,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useAppDispatch, useAppSelector } from '@core/store/hooks.ts';
 import { getProductsThunk } from '../../store/thunk/ProductsModuleThunk.ts';
+import { setProductsSorting } from '../../store/reducer/ProductsModuleReducer.ts';
 import {
   PRODUCTS_PAGE_SIZE,
   PRODUCTS_SEARCH_DEBOUNCE_MS,
@@ -22,6 +25,8 @@ import {
   selectProducts,
   selectProductsError,
   selectProductsLoading,
+  selectProductsSortBy,
+  selectProductsSortOrder,
   selectProductsTotal,
 } from '../../selectors/selectors.ts';
 import type { IProduct } from '../../interfaces/types.ts';
@@ -38,12 +43,26 @@ import 'ag-grid-community/styles/ag-theme-quartz.css';
 // удобно вынести в main.tsx, чтобы регистрировать глобально один раз для всего приложения
 ModuleRegistry.registerModules([AllCommunityModule]);
 
+const SORTABLE_PRODUCT_FIELDS: Array<keyof IProduct> = [
+  'title',
+  'brand',
+  'sku',
+  'rating',
+  'price',
+  'category',
+];
+
+const isProductSortField = (value: string): value is keyof IProduct =>
+  SORTABLE_PRODUCT_FIELDS.includes(value as keyof IProduct);
+
 const ProductsList: FC = () => {
   const dispatch = useAppDispatch();
 
   const products = useAppSelector(selectProducts);
   const isLoading = useAppSelector(selectProductsLoading);
   const totalProducts = useAppSelector(selectProductsTotal);
+  const sortBy = useAppSelector(selectProductsSortBy);
+  const sortOrder = useAppSelector(selectProductsSortOrder);
   const requestError = useAppSelector(selectProductsError);
 
   const [searchValue, setSearchValue] = useState('');
@@ -72,8 +91,10 @@ const ProductsList: FC = () => {
       limit: PRODUCTS_PAGE_SIZE,
       skip,
       search: searchQuery || undefined,
+      sortBy: sortBy || undefined,
+      order: sortOrder || undefined,
     }));
-  }, [dispatch, effectivePage, searchQuery]);
+  }, [dispatch, effectivePage, searchQuery, sortBy, sortOrder]);
 
   useEffect(() => {
     fetchProducts();
@@ -84,6 +105,51 @@ const ProductsList: FC = () => {
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
+
+  const handleGridReady = useCallback((event: GridReadyEvent<IProduct>) => {
+    if (!sortBy || !sortOrder) {
+      return;
+    }
+
+    event.api.applyColumnState({
+      defaultState: {
+        sort: null,
+      },
+      state: [{
+        colId: sortBy,
+        sort: sortOrder,
+      }],
+    });
+  }, [sortBy, sortOrder]);
+
+  const handleSortChanged = useCallback((event: SortChangedEvent<IProduct>) => {
+    const sortedColumnState = event.api
+      .getColumnState()
+      .filter((columnState) => Boolean(columnState.sort))
+      .sort((columnA, columnB) => (columnA.sortIndex ?? 0) - (columnB.sortIndex ?? 0))[0];
+
+    if (!sortedColumnState?.sort || !isProductSortField(sortedColumnState.colId)) {
+      if (sortBy || sortOrder) {
+        dispatch(setProductsSorting({
+          sortBy: null,
+          sortOrder: null,
+        }));
+      }
+
+      return;
+    }
+
+    const nextSortOrder = sortedColumnState.sort === 'asc' ? 'asc' : 'desc';
+
+    if (sortBy === sortedColumnState.colId && sortOrder === nextSortOrder) {
+      return;
+    }
+
+    dispatch(setProductsSorting({
+      sortBy: sortedColumnState.colId,
+      sortOrder: nextSortOrder,
+    }));
+  }, [dispatch, sortBy, sortOrder]);
 
 
   return (
@@ -168,6 +234,8 @@ const ProductsList: FC = () => {
               rowData={products}
               columnDefs={columnDefs}
               {...productsGridConfig}
+              onGridReady={handleGridReady}
+              onSortChanged={handleSortChanged}
               loading={isLoading}
             />
           </div>

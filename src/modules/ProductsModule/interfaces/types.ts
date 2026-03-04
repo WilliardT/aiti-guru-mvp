@@ -20,6 +20,8 @@ export interface IProductsQueryParams {
   limit: number;
   skip: number;
   search?: string;
+  sortBy?: keyof IProduct;
+  order?: 'asc' | 'desc';
 }
 
 export interface IProductsModuleState {
@@ -27,5 +29,6 @@ export interface IProductsModuleState {
   isLoading: boolean;
   error: string | null;
   total: number;
+  sortBy: keyof IProduct | null;
+  sortOrder: 'asc' | 'desc' | null;
 }
-

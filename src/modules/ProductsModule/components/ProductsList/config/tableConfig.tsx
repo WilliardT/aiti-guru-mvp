@@ -167,12 +167,13 @@ export const getProductsColumnDefs = (styles: Record<string, string>): ColDef<IP
       cellRenderer: () => renderActionsCell(styles),
       suppressHeaderMenuButton: true,
       headerName: '',
+      sortable: false,
     },
   ];
 };
 
 export const productsDefaultColDef: ColDef<IProduct> = {
-  sortable: false,
+  sortable: true,
   resizable: false,
 };
 

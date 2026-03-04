@@ -12,3 +12,9 @@ export const selectProductsError =
 
 export const selectProductsTotal =
   (state: RootState): number => state.productsModule.total;
+
+export const selectProductsSortBy =
+  (state: RootState): keyof IProduct | null => state.productsModule.sortBy;
+
+export const selectProductsSortOrder =
+  (state: RootState): 'asc' | 'desc' | null => state.productsModule.sortOrder;
