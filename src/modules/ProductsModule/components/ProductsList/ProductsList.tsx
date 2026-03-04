@@ -40,11 +40,10 @@ import {
   getProductsColumnDefs,
   productsGridConfig,
 } from './config/tableConfig.tsx';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import styles from './ProductsList.module.scss';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import 'react-toastify/dist/ReactToastify.css';
 
 // инициализация AG Grid в модульном режиме
 // удобно вынести в main.tsx, чтобы регистрировать глобально один раз для всего приложения
@@ -283,14 +282,6 @@ const ProductsList: FC = () => {
         isOpen={isAddProductModalOpen}
         onClose={closeAddProductModal}
         onSubmit={handleAddProductSubmit}
-      />
-
-      {/* на уровень приложения */}
-      <ToastContainer
-        position="top-right"
-        autoClose={2500}
-        closeOnClick
-        pauseOnHover
       />
     </div>
   );

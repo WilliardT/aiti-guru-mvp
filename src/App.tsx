@@ -7,6 +7,8 @@ import {
   saveAuthToken,
 } from '@core/router/helpers/authSession.ts';
 import { usePathname } from '@core/router/helpers/usePathname.ts';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import LoginPage from './pages/LoginPage/LoginPage.tsx';
 import ProductsPage from './pages/ProductsPage/ProductsPage.tsx';
 
@@ -52,7 +54,18 @@ const App:FC = () => {
   }, [pathname, isAuthorized]);
 
 
-  return page;
+  return (
+    <>
+      {page}
+
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2500}
+        closeOnClick
+        pauseOnHover
+      />
+    </>
+  );
 }
 
 export default App;
