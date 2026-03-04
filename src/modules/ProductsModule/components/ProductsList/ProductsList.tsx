@@ -136,7 +136,14 @@ const ProductsList: FC = () => {
               className={styles.addButton}
               type="button"
             >
-              <span className={styles.addButtonIcon}>+</span>
+              <img
+                className={styles.addButtonIcon}
+                src="/icons/PlusCircle.svg"
+                width={22}
+                height={22}
+                alt=""
+                aria-hidden="true"
+              />
               Добавить
             </button>
           </div>
