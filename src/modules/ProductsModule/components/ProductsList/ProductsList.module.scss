@@ -1,10 +1,356 @@
 @use "@core/styles/variables" as *;
 
-.list {
+.page {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.topBar {
+  width: 100%;
+  min-height: 98px;
+  border-radius: 14px;
+  background: #f6f6f8;
+  border: 1px solid #ededf1;
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: max-content minmax(340px, 1fr);
+  gap: 26px;
+  align-items: center;
+}
+
+.pageTitle {
+  color: #2f2f37;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.searchField {
+  min-height: 52px;
+  border-radius: 10px;
+  border: 1px solid #e8e8ec;
+  background: #ececef;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 10px;
+}
+
+.searchIcon {
+  color: #8f919c;
+  font-size: 24px;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.searchInput {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #2f2f37;
+  font-size: 20px;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #9ea0a8;
+}
+
+.tableCard {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #ededf1;
+  background: $appWhite;
+  min-height: 740px;
+  padding: 26px 28px 20px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 18px;
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.tableTitle {
+  color: #2f2f37;
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.tableButtons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.refreshButton {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid #e3e4ea;
+  background: #f8f8fb;
+  color: #7a7e8a;
+  font-size: 23px;
+  line-height: 1;
+}
+
+.refreshButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.addButton {
+  min-width: 158px;
+  min-height: 42px;
+  border-radius: 10px;
+  background: $appBlue;
+  color: $appWhite;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.addButtonIcon {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.errorText {
+  color: #db4b4b;
+  font-size: 16px;
+  margin-top: -8px;
+}
+
+.gridWrap {
+  height: 560px;
+}
+
+.gridTheme {
   width: 100%;
   height: 100%;
+}
+
+.gridTheme :global(.ag-root-wrapper) {
+  border: 0;
+  border-radius: 0;
+}
+
+.gridTheme :global(.ag-header) {
   background: $appWhite;
-  max-width: 640px;
-  padding: 24px;
+  border-bottom: 1px solid #ececf1;
+}
+
+.gridTheme :global(.ag-header-cell) {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.gridTheme :global(.ag-header-cell-text) {
+  color: #a4a6af;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.gridTheme :global(.ag-row) {
+  border-bottom: 1px solid #ececf1;
+}
+
+.gridTheme :global(.ag-row:hover) {
+  background: #fafbff;
+}
+
+.gridTheme :global(.ag-cell) {
+  border-right: none;
+  padding-left: 14px;
+  padding-right: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.gridTheme :global(.ag-selection-checkbox) {
+  margin-right: 0;
+}
+
+.gridTheme :global(.ag-icon-checkbox-checked),
+.gridTheme :global(.ag-icon-checkbox-unchecked),
+.gridTheme :global(.ag-icon-checkbox-indeterminate) {
+  color: #4a59d8;
+}
+
+.nameCell {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.nameImageWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: #f2f2f4;
+  border: 1px solid #ececf1;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.nameImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nameText {
+  min-width: 0;
+}
+
+.nameTitle {
+  color: #232630;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nameCategory {
+  color: #acadb6;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
+.vendorValue {
+  color: #1f2230;
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.skuValue {
+  color: #292b35;
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.ratingValue {
+  color: #2c2f3a;
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.ratingValueLow {
+  color: #db4b4b;
+}
+
+.ratingDivider {
+  color: #3c3f49;
+}
+
+.priceValue {
+  color: #2a2d35;
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.actionsCell {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.actionPrimary {
+  min-width: 52px;
+  height: 34px;
+  border-radius: 999px;
+  background: $appBlue;
+  color: $appWhite;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.actionGhost {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #c5c7cf;
+  color: #9ca0ab;
+  font-size: 22px;
+  line-height: 1;
+}
+
+@media (max-width: 1400px) {
+  .pageTitle,
+  .tableTitle {
+    font-size: 32px;
+  }
+
+  .nameTitle,
+  .vendorValue,
+  .skuValue,
+  .ratingValue,
+  .priceValue {
+    font-size: 22px;
+  }
+
+  .searchInput {
+    font-size: 16px;
+  }
+
+  .gridTheme :global(.ag-header-cell-text) {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 980px) {
+  .topBar {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .tableHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tableButtons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .tableCard {
+    min-height: 640px;
+    padding: 18px 14px 16px;
+  }
+
+  .gridWrap {
+    height: 460px;
+  }
+
 }
