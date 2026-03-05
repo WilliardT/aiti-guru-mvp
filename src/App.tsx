@@ -1,5 +1,5 @@
 import './App.css';
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, Suspense, lazy, useEffect, useMemo, useState } from 'react';
 import { AppRoutes } from './core/router/routes.ts';
 import { navigateTo } from './core/router/navigation.ts';
 import {
@@ -9,9 +9,11 @@ import {
 import { usePathname } from '@core/router/helpers/usePathname.ts';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import LoginPage from './pages/LoginPage/LoginPage.tsx';
-import ProductsPage from './pages/ProductsPage/ProductsPage.tsx';
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx';
+
+
+const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage.tsx'));
+const ProductsPage = lazy(() => import('./pages/ProductsPage/ProductsPage.tsx'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage.tsx'));
 
 const knownRoutes = new Set<string>([
   AppRoutes.ROOT,
@@ -81,7 +83,9 @@ const App:FC = () => {
 
   return (
     <>
-      {page}
+      <Suspense fallback={<main className="appLayout" />}>
+        {page}
+      </Suspense>
 
       <ToastContainer
         position="bottom-right"

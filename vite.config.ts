@@ -29,5 +29,39 @@ export default defineConfig({
   ],
   css: {
     devSourcemap: true
-  }
+  },
+  build: {
+    chunkSizeWarningLimit: 900,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) {
+            return;
+          }
+
+          if (id.includes('ag-grid-community') || id.includes('ag-grid-react')) {
+            return 'ag-grid';
+          }
+
+          if (id.includes('@mui') || id.includes('@emotion')) {
+            return 'mui';
+          }
+
+          if (id.includes('@reduxjs/toolkit') || id.includes('react-redux')) {
+            return 'redux';
+          }
+
+          if (id.includes('react-toastify')) {
+            return 'toastify';
+          }
+
+          if (id.includes('axios')) {
+            return 'http';
+          }
+
+          return 'vendor';
+        },
+      },
+    },
+  },
 });
