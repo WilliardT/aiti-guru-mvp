@@ -1,73 +1,40 @@
-# React + TypeScript + Vite
+# AITI Guru MVP
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Клиентское приложение на React + TypeScript для авторизации и работы со списком товаров (таблица, поиск, сортировка, пагинация, локальное добавление товара).
 
-Currently, two official plugins are available:
+## Стек
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/docs/)
+- [Vite](https://vite.dev/guide/)
+- [Redux Toolkit](https://redux-toolkit.js.org/introduction/getting-started) + [React Redux](https://react-redux.js.org/)
+- [React Router](https://reactrouter.com/en/main)
+- [AG Grid (React)](https://www.ag-grid.com/react-data-grid/getting-started/)
+- [MUI](https://mui.com/material-ui/getting-started/)
+- [React Toastify](https://fkhadra.github.io/react-toastify/introduction)
+- [Axios](https://axios-http.com/docs/intro)
+- [Sass](https://sass-lang.com/documentation/)
+- [ESLint](https://eslint.org/docs/latest/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Быстрый старт
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Скрипты
+- `npm run dev` — запуск dev-сервера
+- `npm run build` — type-check + production build
+- `npm run preview` — локальный просмотр production build
+- `npm run lint` — проверка линтером
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Архитектура (кратко)
+- `src/modules/*` — бизнес-модули (`AuthModule`, `ProductsModule`)
+- `src/pages/*` — страницы (`LoginPage`, `ProductsPage`, `NotFoundPage`)
+- `src/core/*` — store, роутинг-хелперы, общая инфраструктура
+- Роутинг реализован через `react-router-dom`
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Данные и API
+- Авторизация: [DummyJSON Auth API](https://dummyjson.com/docs/auth)
+- Товары загружаются с [DummyJSON Products API](https://dummyjson.com/docs/products)
+- Поиск выполняется через `/products/search`
+- Добавление товара в UI локальное (без POST-запроса)
