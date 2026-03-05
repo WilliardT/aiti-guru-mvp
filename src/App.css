@@ -10,3 +10,49 @@
 .appLayoutProducts {
   align-items: flex-start;
 }
+
+.appNotFoundCard,
+.appErrorCard {
+  width: min(560px, 100%);
+  border-radius: 16px;
+  border: 1px solid #e5e7ef;
+  background: #ffffff;
+  padding: 32px 28px;
+  box-shadow: 0 20px 34px rgba(26, 32, 50, 0.08);
+  text-align: center;
+}
+
+.appNotFoundCode {
+  color: #3C538E;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.appNotFoundTitle,
+.appErrorTitle {
+  color: #202535;
+  font-size: 26px;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.appNotFoundText,
+.appErrorText {
+  color: #6c7282;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.appErrorAction {
+  margin-top: 18px;
+  min-height: 42px;
+  border-radius: 10px;
+  border: 1px solid #3C538E;
+  background: #3C538E;
+  color: #ffffff;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+}

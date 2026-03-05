@@ -11,11 +11,18 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoginPage from './pages/LoginPage/LoginPage.tsx';
 import ProductsPage from './pages/ProductsPage/ProductsPage.tsx';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx';
+
+const knownRoutes = new Set<string>([
+  AppRoutes.ROOT,
+  AppRoutes.LOGIN,
+  AppRoutes.PRODUCTS,
+]);
 
 
 const App:FC = () => {
   const pathname = usePathname();
-  const [isAuthorized, setIsAuthorized] = useState(hasAuthToken());
+  const [isAuthorized, setIsAuthorized] = useState(() => hasAuthToken());
 
   const handleLogin = (
     token: string,
@@ -29,13 +36,19 @@ const App:FC = () => {
   };
 
   useEffect(() => {
-    if (!isAuthorized && pathname !== AppRoutes.LOGIN) {
+    if (pathname === AppRoutes.ROOT) {
+      navigateTo(isAuthorized ? AppRoutes.PRODUCTS : AppRoutes.LOGIN, true);
+
+      return;
+    }
+
+    if (!isAuthorized && pathname === AppRoutes.PRODUCTS) {
       navigateTo(AppRoutes.LOGIN, true);
 
       return;
     }
 
-    if (isAuthorized && (pathname === AppRoutes.ROOT || pathname === AppRoutes.LOGIN)) {
+    if (isAuthorized && pathname === AppRoutes.LOGIN) {
       navigateTo(AppRoutes.PRODUCTS, true);
     }
   }, [isAuthorized, pathname]);
@@ -43,14 +56,26 @@ const App:FC = () => {
 
   const page = useMemo(() => {
     if (pathname === AppRoutes.LOGIN) {
+      if (isAuthorized) {
+        return null;
+      }
+
       return <LoginPage onLogin={handleLogin} />;
     }
 
-    if (pathname === AppRoutes.PRODUCTS && isAuthorized) {
+    if (pathname === AppRoutes.PRODUCTS) {
+      if (!isAuthorized) {
+        return null;
+      }
+
       return <ProductsPage />;
     }
 
-    return null;
+    if (!knownRoutes.has(pathname)) {
+      return <NotFoundPage />;
+    }
+
+    return <NotFoundPage />;
   }, [pathname, isAuthorized]);
 
 
