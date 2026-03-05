@@ -11,6 +11,7 @@ import {
   Routes,
   useNavigate,
 } from 'react-router-dom';
+import AppLayout from '@core/components/AppLayout/AppLayout.tsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -39,7 +40,7 @@ const App:FC = () => {
 
   return (
     <>
-      <Suspense fallback={<main className="appLayout" />}>
+      <Suspense fallback={<AppLayout variant="centered" />}>
         <Routes>
           <Route
             path={AppRoutes.ROOT}

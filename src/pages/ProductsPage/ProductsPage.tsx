@@ -1,13 +1,14 @@
 import { type FC } from 'react';
+import AppLayout from '@core/components/AppLayout/AppLayout.tsx';
 import ProductsModule from '../../modules/ProductsModule/ProductsModule.tsx';
 
 
 const ProductsPage: FC = () => {
 
   return (
-    <main className="appLayout appLayoutProducts">
+    <AppLayout variant="top">
       <ProductsModule />
-    </main>
+    </AppLayout>
   );
 };
 

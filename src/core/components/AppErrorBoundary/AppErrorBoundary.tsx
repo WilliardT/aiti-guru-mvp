@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import AppLayout from '@core/components/AppLayout/AppLayout.tsx';
 
 interface IAppErrorBoundaryProps {
   children: ReactNode;
@@ -33,7 +34,7 @@ class AppErrorBoundary extends Component<IAppErrorBoundaryProps, IAppErrorBounda
     }
 
     return (
-      <main className="appLayout">
+      <AppLayout variant="centered">
         <section className="appErrorCard">
           <h1 className="appErrorTitle">Произошла ошибка интерфейса</h1>
           <p className="appErrorText">
@@ -48,7 +49,7 @@ class AppErrorBoundary extends Component<IAppErrorBoundaryProps, IAppErrorBounda
             Обновить страницу
           </button>
         </section>
-      </main>
+      </AppLayout>
     );
   }
 }

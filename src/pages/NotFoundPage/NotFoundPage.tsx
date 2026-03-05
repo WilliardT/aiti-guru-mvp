@@ -1,8 +1,9 @@
 import { type FC } from 'react';
+import AppLayout from '@core/components/AppLayout/AppLayout.tsx';
 
 const NotFoundPage: FC = () => {
   return (
-    <main className="appLayout">
+    <AppLayout variant="centered">
       <section className="appNotFoundCard">
         <p className="appNotFoundCode">404</p>
         <h1 className="appNotFoundTitle">Страница не найдена</h1>
@@ -10,7 +11,7 @@ const NotFoundPage: FC = () => {
           Проверьте адрес страницы или вернитесь позже.
         </p>
       </section>
-    </main>
+    </AppLayout>
   );
 };
 

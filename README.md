@@ -16,6 +16,10 @@
 - [ESLint](https://eslint.org/docs/latest/)
 
 ## Быстрый старт
+Требования к окружению:
+- Node.js: `22.12+`
+- npm: `10+`
+
 ```bash
 npm install
 npm run dev
